@@ -37,7 +37,10 @@ export function PollApp() {
     window.history.replaceState(null, "", url);
     setPoll(p);
     setLink(url.toString());
-    const next = [{ title: p.title, hash, updatedAt: new Date().toISOString() }, ...saved.filter((s) => s.title !== p.title)].slice(0, 20);
+    const next = [
+      { title: p.title, hash, updatedAt: new Date().toISOString() },
+      ...saved.filter((s) => s.title !== p.title),
+    ].slice(0, 20);
     setSaved(next);
     save(KEY, next);
   }
@@ -65,13 +68,20 @@ export function PollApp() {
     <div className="h-full overflow-y-auto bg-slate-50 text-slate-900">
       <div className="mx-auto flex max-w-2xl flex-col gap-5 p-4">
         {error && (
-          <p role="alert" className="rounded-xl bg-rose-50 p-3 text-sm font-semibold text-rose-800 ring-1 ring-rose-200">
+          <p
+            role="alert"
+            className="rounded-xl bg-rose-50 p-3 text-sm font-semibold text-rose-800 ring-1 ring-rose-200"
+          >
             {error}
           </p>
         )}
         {poll ? (
           <>
-            <button type="button" onClick={close} className="inline-flex min-h-11 items-center gap-1 self-start text-sm font-semibold text-fuchsia-900 underline hover:no-underline">
+            <button
+              type="button"
+              onClick={close}
+              className="inline-flex min-h-11 items-center gap-1 self-start text-sm font-semibold text-fuchsia-900 underline hover:no-underline"
+            >
               <ArrowLeft size={16} aria-hidden="true" /> New poll
             </button>
             <PollView key={link} poll={poll} link={link} onVote={publish} />
@@ -86,8 +96,15 @@ export function PollApp() {
                 </h2>
                 <ul className="flex flex-col gap-1">
                   {saved.map((s) => (
-                    <li key={s.hash} className="flex items-center gap-2 rounded-xl bg-white pr-1 ring-1 ring-slate-200">
-                      <button type="button" onClick={() => open(s)} className="min-h-12 flex-1 rounded-xl px-3 text-left font-semibold hover:bg-slate-50">
+                    <li
+                      key={s.hash}
+                      className="flex items-center gap-2 rounded-xl bg-white pr-1 ring-1 ring-slate-200"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => open(s)}
+                        className="min-h-12 flex-1 rounded-xl px-3 text-left font-semibold hover:bg-slate-50"
+                      >
                         {s.title}
                       </button>
                       <button

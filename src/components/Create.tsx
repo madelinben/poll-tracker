@@ -1,6 +1,6 @@
 import { CalendarDays, ListChecks, Plus, X } from "lucide-react";
 import { useState } from "react";
-import { type Poll, type PollKind } from "../lib/poll";
+import type { Poll, PollKind } from "../lib/poll";
 import { card, field, primary } from "./ui";
 
 export function Create({ onCreate }: { onCreate: (p: Poll) => void }) {
@@ -24,7 +24,13 @@ export function Create({ onCreate }: { onCreate: (p: Poll) => void }) {
       </h2>
       <label className="flex flex-col gap-1 text-sm font-semibold">
         Question
-        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="When can everyone do five-a-side?" className={field} required />
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="When can everyone do five-a-side?"
+          className={field}
+          required
+        />
       </label>
       <fieldset className="flex gap-2">
         <legend className="mb-1 text-sm font-semibold">Choosing</legend>
@@ -34,7 +40,10 @@ export function Create({ onCreate }: { onCreate: (p: Poll) => void }) {
             ["options", "Options", ListChecks],
           ] as const
         ).map(([id, text, Icon]) => (
-          <label key={id} className="flex min-h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl text-sm font-semibold ring-1 ring-slate-300 has-checked:bg-fuchsia-800 has-checked:text-white has-focus-visible:outline-2 has-focus-visible:outline-fuchsia-800">
+          <label
+            key={id}
+            className="flex min-h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl text-sm font-semibold ring-1 ring-slate-300 has-checked:bg-fuchsia-800 has-checked:text-white has-focus-visible:outline-2 has-focus-visible:outline-fuchsia-800"
+          >
             <input
               type="radio"
               name="kind"
@@ -68,9 +77,17 @@ export function Create({ onCreate }: { onCreate: (p: Poll) => void }) {
       {options.length > 0 && (
         <ul className="flex flex-wrap gap-2">
           {options.map((o) => (
-            <li key={o} className="flex items-center gap-1 rounded-full bg-fuchsia-50 py-1 pl-3 pr-1 text-sm font-semibold text-fuchsia-900 ring-1 ring-fuchsia-200">
+            <li
+              key={o}
+              className="flex items-center gap-1 rounded-full bg-fuchsia-50 py-1 pl-3 pr-1 text-sm font-semibold text-fuchsia-900 ring-1 ring-fuchsia-200"
+            >
               {o}
-              <button type="button" onClick={() => setOptions(options.filter((x) => x !== o))} aria-label={`Remove ${o}`} className="grid size-8 place-items-center rounded-full hover:bg-fuchsia-100">
+              <button
+                type="button"
+                onClick={() => setOptions(options.filter((x) => x !== o))}
+                aria-label={`Remove ${o}`}
+                className="grid size-8 place-items-center rounded-full hover:bg-fuchsia-100"
+              >
                 <X size={14} aria-hidden="true" />
               </button>
             </li>
@@ -80,7 +97,9 @@ export function Create({ onCreate }: { onCreate: (p: Poll) => void }) {
       <button
         type="button"
         disabled={!title.trim() || options.length < 2}
-        onClick={() => onCreate({ v: 1, title: title.trim().slice(0, 80), kind, options, votes: [] })}
+        onClick={() =>
+          onCreate({ v: 1, title: title.trim().slice(0, 80), kind, options, votes: [] })
+        }
         className={primary}
       >
         Create poll with {options.length} {kind === "dates" ? "dates" : "options"}
