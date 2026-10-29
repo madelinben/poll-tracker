@@ -1,6 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import { createRoot } from "react-dom/client";
-import { PollApp, meta } from "../src";
+import { meta, PollApp } from "../src";
 import "./demo.css";
 
 // Standalone GitHub Pages shell: app title and a way back to the rest of the free tools
